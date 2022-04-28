@@ -1,0 +1,56 @@
+<% if @range == '2' %>
+<h2>Books search for "<%= @word %>"</h2>
+<% else %>
+<h2>Users search for "<%= @word %>"</h2>
+<% end %>
+<!--books一覧 -->
+<table class="table table-hover table-inverse">
+　<% if @range == '2' %>
+  <thead>
+    <tr>
+     <th></th>
+     <th>Title</th>
+     <th>Opinion</th>
+     <th colspan="3"></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+     <% @book.each do |book| %>
+     <tr>
+      <td>
+       <%= link_to(book.user) do %>
+       <%= image_tag book.user.get_profile_image, size:'50x50' %>
+       <% end %>
+      </td>
+      <td>
+       <%= link_to book.title, book, class: "book_#{book.id}" %>
+      </td>
+      <td><%= book.body %></td>
+     </tr>
+     <% end %>
+  </tbody>
+
+  <% else %>
+  <thead>
+     <tr>
+      <th>image</th>
+      <th>name</th>
+      <th>introduction</th>
+      <th colspan="3"></th>
+     </tr>
+   </thead>
+
+   <tbody>
+    <% @user.each do |user| %>
+     <tr>
+      <td><%= image_tag user.get_profile_image, size:'50x50' %></td>
+      <td><%= user.name%></td>
+      <td><%= user.introduction %></td>
+      <td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
+     </tr>
+    <% end %>
+   </tbody>
+   <% end %>
+ </table>
