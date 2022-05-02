@@ -10,8 +10,14 @@ before_action :correct_user, only: [:edit, :update]
   end
 
   def index
-    @book = Book.new
-    @books = Book.all
+    @book = Book.ne順
+    #一週間のいいねの多い順
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+      sort_by {|x|
+        x.favorites.where(created_at: from...to).count
+      }.reverse
   end
 
   def create
