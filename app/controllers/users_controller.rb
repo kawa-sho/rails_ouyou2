@@ -14,6 +14,34 @@ class UsersController < ApplicationController
       sort_by {|x|
         x.favorites.where(created_at: from...to).size
       }.reverse
+
+    #DM機能の作成
+    #自分のエントリー情報を抽出
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    #見てるページのユーザーのエントリー情報を抽出
+    @userEntry = Entry.where(user_id: @user.id)
+    #見てるページのユーザーと自分のユーザーがおんなじかどうか
+    if @user.id == current_user.id
+    else
+    #自分の持ってるエントリー情報と見てるページのユーザーのエントリー情報をすべて抽出する
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+    #自分の持ってるroom_idと見てるページのユーザーの持ってるroom_idの中に同じroom_idがあるかどうか
+          if cu.room_id == u.room_id then
+    #roomはあるよと定義しroom_idをインスタンス変数で渡す
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+    #roomがない場合
+      if @isRoom
+      else
+    #新しいインスタンスを制作する
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def index
