@@ -10,7 +10,7 @@ before_action :correct_user, only: [:edit, :update]
   end
 
   def index
-    @book = Book.ne順
+    @book = Book.new
     #一週間のいいねの多い順
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
