@@ -1,0 +1,31 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <h2>
+      <% @entries.each do |e| %>
+        <%= image_tag e.user.get_profile_image, size:'50x50' %>
+        <%= e.user.name %>さん
+      <% end %>
+      のチャットルーム
+    </h2>
+  </div>
+  <div>
+    <% if @messages.present? %>
+      <% @messages.each do |m| %>
+        <div class="row">
+        <%= image_tag m.user.get_profile_image, size:'30x30' %>
+        <%= m.content %>
+        <%= m.user.name %>
+        <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+        </div>
+        <div class="row"><br></div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= form_with model: [@message] do |f| %>
+      <%= f.text_field :content, class: "w-100 content-textfield" %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+</div>

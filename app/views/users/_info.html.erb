@@ -24,6 +24,26 @@
   <% else %>
     <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: 'btn btn-success' %>
   <% end %>
+  <!-- dm機能 -->
+  <!-- 見てるページのユーザーと自分のユーザーが同じかどうか -->
+  <% if user.id == current_user.id %>
+  <!-- お互いにフォローしあっているか -->
+  <% elsif (current_user.following?(user)) && (user.following?(current_user)) %>
+  <!-- roomがすでにあるかどうか -->
+    <% if isRoom == true %>
+  <!-- rooms#showへ -->
+      <%= link_to "チャットへ", room_path(roomId), class: "btn btn-primary" %>
+    <% else %>
+  <!-- コントローラーにパラメータを送る記述 -->
+      <%= form_with model: [room] do |f| %>
+        <%= fields_for entry do |e| %>
+  <!-- 相手のエントリー情報を入れるためにuser.idを渡す -->
+          <%= e.hidden_field :user_id, value: user.id %>
+        <% end %>
+        <%= f.submit "チャットを始める", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 <% if current_user == user %>
 <div class='row'>

@@ -23,6 +23,7 @@ class RoomsController < ApplicationController
     else
     #直前のサイトに戻る、戻れなければroot_pathに飛ぶ
       redirect_back(fallback_location: root_path)
+    end
   end
 
   private
