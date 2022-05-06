@@ -1,0 +1,16 @@
+current directory: /home/ec2-user/environment/Rails6-bookers2-debug-main/vendor/bundle/ruby/2.6.0/gems/racc-1.5.2/ext/racc/cparse
+/home/ec2-user/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0 -r ./siteconf20220506-15019-u5ux5e.rb extconf.rb
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /home/ec2-user/environment/Rails6-bookers2-debug-main/vendor/bundle/ruby/2.6.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR=" clean
+
+current directory: /home/ec2-user/environment/Rails6-bookers2-debug-main/vendor/bundle/ruby/2.6.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR="
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/ec2-user/environment/Rails6-bookers2-debug-main/vendor/bundle/ruby/2.6.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20220506-15019-xja2yj/racc
