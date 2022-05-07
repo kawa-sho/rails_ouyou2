@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :group_owner_check, only: [:new_mail, :send_mail]
 
   def index
     @book = Book.new
@@ -58,7 +59,8 @@ class GroupsController < ApplicationController
     group_users = @group.users
     @mail_title = params[:mail_title]
     @mail_content = params[:mail_content]
-    ContactMailer.send_mail(@mail_title, @mail_content,group_users).deliver
+    @user_name = current_user.name
+    ContactMailer.send_mail(@user_name,@mail_title, @mail_content,group_users).deliver
   end
 
   private
@@ -70,6 +72,14 @@ class GroupsController < ApplicationController
   def ensure_correct_user
     @group = Group.find(params[:id])
     unless @group.owner_id == current_user.id
+      redirect_to groups_path
+    end
+  end
+
+  def group_owner_check
+    @group = Group.find(params[:group_id])
+    if @group.owner_id == current_user.id
+    else
       redirect_to groups_path
     end
   end
