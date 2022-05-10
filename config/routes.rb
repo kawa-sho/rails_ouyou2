@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'search' => 'searches#search'
-  get "search_tag"=>"posts#search_tag"
+  get "search_tag"=>"books#search_tag"
   get 'relationships/followings'
   get 'relationships/followers'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

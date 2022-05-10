@@ -11,7 +11,7 @@
       <h2>Books</h2>
       <p>
         <% @tag_list.each do |list| %>
-          <%= list.name %>
+          <%= link_to list.name,search_tag_path(tag_id: list.id) %>
           <%= "(#{list.books.count})" %>
         <% end %>
       </p>

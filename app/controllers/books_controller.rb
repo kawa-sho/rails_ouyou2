@@ -101,12 +101,22 @@ before_action :correct_user, only: [:edit, :update]
   end
 
   def search_tag
-  #検索結果画面でもタグ一覧表示
-    @tag_list=Tag.all
-　#検索されたタグを受け取る
+    #検索結果画面でもタグ一覧表示
+    @tag_list=Tag.all.sort_by {|x| x.books.count}.reverse
+    #検索されたタグを受け取る
     @tag=Tag.find(params[:tag_id])
-　#検索されたタグに紐づく投稿を表示
-    @posts=@tag.posts.page(params[:page]).per(10)
+    #検索されたタグに紐づく投稿を表示
+
+    #一週間のいいねの多い順
+    #今日の終わり
+    to = Time.current.at_end_of_day
+    #一週間前
+    from = (to - 6.day).at_beginning_of_day
+
+    @books=@tag.books.includes(:favorited_users).
+      sort_by {|x|
+        x.favorites.where(created_at: from...to).size
+      }.reverse
   end
 
   private
