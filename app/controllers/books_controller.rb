@@ -19,11 +19,19 @@ before_action :correct_user, only: [:edit, :update]
     to = Time.current.at_end_of_day
     #一週間前
     from = (to - 6.day).at_beginning_of_day
-    #favoriteとuserを取り出しておいて、一週間前から今日の終わりまででのいいね数でソートする
-    @books = Book.includes(:favorited_users).
+    if params[:latest]
+      @books = Book.latest
+      #render :sort_index
+    elsif params[:rate_count]
+      @books = Book.rate_count
+      #render :sort_index
+    else
+      #favoriteとuserを取り出しておいて、一週間前から今日の終わりまででのいいね数でソートする
+      @books = Book.includes(:favorited_users).
       sort_by {|x|
         x.favorites.where(created_at: from...to).size
       }.reverse
+    end
   end
 
   def create
