@@ -1,0 +1,39 @@
+git branch 　　　　　　　　　　　　　　　　ブランチの確認
+
+git checkout -b ブランチ名　　　 　　　　　ブランチの作成
+
+git commit --allow-empty -m "コミット名"   空コミット
+
+git pull origin ブランチ名　　　　　　　　 リモートの最新版をローカルに反映させる
+
+
+してはいけないものをコミットした場合　git reset ~~~~
+プッシュまでしてしまった場合は　　　　git push -f origin ブランチ名　　　上書き
+
+余計なものをコミットした場合　　　　　git revert/git rmコマンドでcommmitを取り消す
+
+mainブランチで編集してしまった場合　　git stash コマンドで退避してブランチ移動する
+
+
+git --version                         バージョン確認
+
+git clean -d -f .
+
+git rm -r --フォルダd
+
+
+
+ブランチ名は
+feature-ankoを新規機能の開発用で使う
+
+
+VIエディタみたいなやつ
+ctrl+X
+NO
+gnu nanoでの検索
+
+Commit 命名ルール
+新たな機能やファイルを追加した場合 → Add
+既存の機能やファイルを削除した場合 → Remove
+既存のコードを別のコードに編集した場合 → Fix
+既存のコードに新たなコードを追記した場合 → Update
